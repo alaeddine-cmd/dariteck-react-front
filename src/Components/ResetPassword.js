@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import {useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import ResetSuccess from './ResetSuccess';
@@ -7,6 +7,7 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import logo from './assets/images/dariteck_logo.png';
+import './ResetPassword.css'
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -95,6 +96,7 @@ const ResetPassword = () => {
         )}
         <form style={{ width: '100%', marginTop: '8px' }} noValidate>
           <TextField
+            className='ResetPassword'
             variant="outlined"
             margin="normal"
             required
@@ -112,6 +114,7 @@ const ResetPassword = () => {
             }}
           />
           <TextField
+            className='ResetPassword'
             variant="outlined"
             margin="normal"
             required
@@ -120,6 +123,9 @@ const ResetPassword = () => {
             type="password"
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
+            InputProps={{
+              style: { borderColor: '#ED2647' }, // Change the border color here
+            }}
           />
           <Button
             fullWidth
@@ -127,7 +133,7 @@ const ResetPassword = () => {
             color="primary"
             style={{ margin: '24px 0 16px', backgroundColor: '#ED2647' }}
             onClick={isLoading ? null : handleClick}
-            >
+          >
             {isLoading ? 'Loading...' : 'Reset Password'}
           </Button>
         </form>
