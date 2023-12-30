@@ -49,7 +49,7 @@ const ResetPassword = () => {
       }
 
       // Make an API call to reset the password
-      const response = await fetch(`api/reset-password/${token}`, {
+      const response = await fetch(`/api/reset-password/${token}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
