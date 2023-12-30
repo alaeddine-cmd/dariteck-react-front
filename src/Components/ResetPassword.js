@@ -72,6 +72,15 @@ const ResetPassword = () => {
       setIsLoading(false);
     }
   };
+  const handleClick = () => {
+    try {
+      resetNewPassword();
+    } catch (error) {
+      console.error('Error in handleClick:', error);
+      setError('An error occurred. Please try again.');
+      setIsLoading(false);
+    }
+  };
   return resetSuccess ? (
     <ResetSuccess />
   ) : (
@@ -117,8 +126,8 @@ const ResetPassword = () => {
             variant="contained"
             color="primary"
             style={{ margin: '24px 0 16px', backgroundColor: '#ED2647' }}
-            onClick={isLoading ? null : resetNewPassword} // Disable click when loading
-          >
+            onClick={isLoading ? null : handleClick}
+            >
             {isLoading ? 'Loading...' : 'Reset Password'}
           </Button>
         </form>

@@ -12,7 +12,7 @@ const ResetSuccess = () => {
           Password Reset Successful
         </Typography>
         <Typography variant="body1" style={{ marginTop: '16px' }}>
-          Your password has been successfully reset.
+          Your password has been successfully reset. Go back to app in order to login.
         </Typography>
       </div>
     </Container>
