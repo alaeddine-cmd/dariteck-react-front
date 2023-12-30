@@ -56,23 +56,22 @@ const ResetPassword = () => {
         },
         body: JSON.stringify({ password: newPassword }),
       });
-
       if (response.ok) {
         const data = await response.json();
         console.log(data); // Handle success message or redirect to a success page
-        setResetSuccess(true); // Set the resetSuccess state to true upon successful password reset
+        setResetSuccess(true);
       } else {
-        const errorData = await response.json();
-        console.error(errorData.message); // Handle error message
+        const errorText = await response.text(); // Fetch the error as text
+        console.error('Error:', errorText); // Log the error
+        setError('An error occurred. Please try again.'); // Set a generic error message
       }
     } catch (error) {
       console.error('Error:', error);
-    }
-    finally {
-      setIsLoading(false); // Set loading to false after the operation finishes
+      setError('An error occurred. Please try again.'); // Set a generic error message
+    } finally {
+      setIsLoading(false);
     }
   };
-
   return resetSuccess ? (
     <ResetSuccess />
   ) : (
