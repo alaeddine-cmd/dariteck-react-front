@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -7,8 +7,6 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import logo from './assets/images/dariteck_logo.png';
-import { useLocation } from 'react-router-dom';
-
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
@@ -28,10 +26,31 @@ const ResetPassword = () => {
   };
 
   const resetNewPassword = async () => {
-    // Your reset password logic here using the token and newPassword state
-    // Example: You might make an API call to your backend to reset the password
-    console.log(token); // Use this token for the password reset logic
-    console.log(newPassword); // Use this newPassword for the updated password
+    try {
+      // Your reset password logic here using the token and newPassword state
+      // Example: You might make an API call to your backend to reset the password
+      console.log(token); // Use this token for the password reset logic
+      console.log(newPassword); // Use this newPassword for the updated password
+      
+      // Make an API call to reset the password
+      const response = await fetch(`/reset-password/${token}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password: newPassword }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log(data); // Handle success message or redirect to a success page
+      } else {
+        const errorData = await response.json();
+        console.error(errorData.message); // Handle error message
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
