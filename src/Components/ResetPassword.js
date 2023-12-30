@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -11,13 +12,22 @@ const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [obscurePassword, setObscurePassword] = useState(true);
+  const { token } = useParams(); // Extracting the token from the URL
+
+  useEffect(() => {
+    // You can console.log(token) to ensure the token is correctly captured
+    // This token can be used in your reset logic
+  }, [token]);
 
   const togglePasswordVisibility = () => {
     setObscurePassword(!obscurePassword);
   };
 
   const resetNewPassword = async () => {
-    // Your reset password logic here
+    // Your reset password logic here using the token and newPassword state
+    // Example: You might make an API call to your backend to reset the password
+    console.log(token); // Use this token for the password reset logic
+    console.log(newPassword); // Use this newPassword for the updated password
   };
 
   return (

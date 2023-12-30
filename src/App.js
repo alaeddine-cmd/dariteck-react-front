@@ -7,7 +7,7 @@ function App() {
   return (
     <Routes>
       <Route path="/activate" element={<AccountActivated />} />
-      <Route path="/reset" element={<ResetPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
     </Routes>
   );
 }
