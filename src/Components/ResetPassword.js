@@ -7,13 +7,17 @@ import Container from '@mui/material/Container';
 import IconButton from '@mui/material/IconButton';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import logo from './assets/images/dariteck_logo.png';
+import { useLocation } from 'react-router-dom';
+
 
 const ResetPassword = () => {
   const [newPassword, setNewPassword] = useState('');
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [obscurePassword, setObscurePassword] = useState(true);
-  const { token } = useParams(); // Extracting the token from the URL
-
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const token = queryParams.get('token');
+  
   useEffect(() => {
     // You can console.log(token) to ensure the token is correctly captured
     // This token can be used in your reset logic
