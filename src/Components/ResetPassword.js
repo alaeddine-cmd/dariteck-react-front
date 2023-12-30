@@ -17,6 +17,8 @@ const ResetPassword = () => {
   const token = queryParams.get('token');
   const [resetSuccess, setResetSuccess] = useState(false);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false); // New loading state
+
 
   useEffect(() => {
     // You can console.log(token) to ensure the token is correctly captured
@@ -29,6 +31,7 @@ const ResetPassword = () => {
 
   const resetNewPassword = async () => {
     try {
+      setIsLoading(true); // Set loading to true when the button is clicked
       // Your reset password logic here using the token and newPassword state
       // Example: You might make an API call to your backend to reset the password
       console.log(token); // Use this token for the password reset logic
@@ -65,6 +68,9 @@ const ResetPassword = () => {
     } catch (error) {
       console.error('Error:', error);
     }
+    finally {
+      setIsLoading(false); // Set loading to false after the operation finishes
+    }
   };
 
   return resetSuccess ? (
@@ -79,7 +85,6 @@ const ResetPassword = () => {
             {error}
           </div>
         )}
-
         <form style={{ width: '100%', marginTop: '8px' }} noValidate>
           <TextField
             variant="outlined"
@@ -113,9 +118,9 @@ const ResetPassword = () => {
             variant="contained"
             color="primary"
             style={{ margin: '24px 0 16px', backgroundColor: '#ED2647' }}
-            onClick={resetNewPassword}
+            onClick={isLoading ? null : resetNewPassword} // Disable click when loading
           >
-            Reset Password
+            {isLoading ? 'Loading...' : 'Reset Password'}
           </Button>
         </form>
       </div>
@@ -124,3 +129,4 @@ const ResetPassword = () => {
 };
 
 export default ResetPassword;
+
